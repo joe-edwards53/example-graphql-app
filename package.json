@@ -1,0 +1,27 @@
+{
+  "name": "example-graphql-app",
+  "version": "1.0.0",
+  "description": ":)",
+  "main": "server.js",
+  "scripts": {
+    "dev-start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe-edwards53/example-graphql-app.git"
+  },
+  "author": "joe edwards",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joe-edwards53/example-graphql-app/issues"
+  },
+  "homepage": "https://github.com/joe-edwards53/example-graphql-app#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
