@@ -1,5 +1,7 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql');
+const morgan = require('morgan')
+const morganBody = require("morgan-body")
 const {
     GraphQLSchema,
     GraphQLObjectType,
@@ -59,6 +61,24 @@ const AnimeType = new GraphQLObjectType({
     })
 })
 
+const CharacterRemove = new GraphQLObjectType({
+    name: 'Character',
+    description: 'This reps a Character in a Anime',
+    fields: () => ({
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+        character: {
+            type: GraphQLInt,
+            resolve: character => {
+                return characters.filter((item) => {
+                    if (item.id !== character.id) {
+                        return item
+                    }
+                })
+            }
+        }
+    })
+})
+
 const RootQueryType = new GraphQLObjectType({
     name: 'Query',
     description: 'Root Query',
@@ -75,8 +95,23 @@ const schema = new GraphQLSchema({
     query: RootQueryType
 })
 
+
+// morganBody(app, {
+//     logAllReqHeader:true, 
+//     prettify:true,
+//     immediateReqLog:true
+// });
+// app.use(morgan('dev'))
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     graphiql: true
 }))
-app.listen(5000., () => console.log('Server running'))
+
+app.post('/', express.json(), function(req, res) {
+    console.log(req.headers);
+    console.log(req.body);
+    res.send({body: req.body});
+});
+
+app.listen(3000., () => console.log('Server running'))
+app.listen(5000., () => console.log('Server running'));
