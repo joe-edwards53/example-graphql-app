@@ -1,7 +1,10 @@
+'use strict';
+
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql');
 const morgan = require('morgan')
 const morganBody = require("morgan-body")
+
 const {
     GraphQLSchema,
     GraphQLObjectType,
@@ -96,11 +99,11 @@ const schema = new GraphQLSchema({
 })
 
 
-// morganBody(app, {
-//     logAllReqHeader:true, 
-//     prettify:true,
-//     immediateReqLog:true
-// });
+morganBody(app, {
+    logAllReqHeader:true, 
+    prettify:true,
+    immediateReqLog:true
+});
 // app.use(morgan('dev'))
 app.use('/graphql', graphqlHTTP({
     schema: schema,
